@@ -1,6 +1,8 @@
 var currentDayEl = $("#currentDay");
 var timeBlocksEl = $(".time-block");
 
+var timeBlockTextArr = []
+
 
 currentDayEl.text(moment().format('dddd, MMMM Do'));
 
@@ -23,8 +25,34 @@ currentDayEl.text(moment().format('dddd, MMMM Do'));
         }
 
     });
-    
+
+    var saveTask = function() {
+        var text = $(this).siblings(".description").val()   
+        console.log(text);
+
         
+        }
+    
+    
+    $(".saveBtn").on("click", saveTask)
+
+
+    // $(".list-group").on("click", "p", function() {
+    //     var text = $(this)
+    //     .text()
+    //     .trim();
+    //     var textInput = $("<textarea>")
+    //     .addClass("form-control")
+    //     .val(text);
+    //     $(this).replaceWith(textInput);
+    //     textInput.trigger("focus");
+    //   });
+
+
+    
+    // setTimeout(function(){
+    //     location.reload();
+    // }, (1000*60)*10);
     
     
 
