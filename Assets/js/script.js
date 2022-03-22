@@ -26,16 +26,31 @@ timeBlocksEl.each(function(){
 var saveTask = function() {
     var text = $(this).siblings(".description").val().trim(); 
     var timeSlot = $(this).parent().attr("id")
-        
+    var taskSame = false;
+       
     var timeBlockInfo = {
         time: timeSlot,
         descript: text
     }
-
-    timeBlockArr.push(timeBlockInfo);
+    
+    for (i = 0; i < timeBlockArr.length; i++) {
         
+        if (timeBlockArr[i].time === timeBlockInfo.time){
+            taskSame = true;
+            var index = i
+            break    
+        }    
+    };
+   
+    if (taskSame){
+        timeBlockArr[index].descript = timeBlockInfo.descript;
+    }
+    else {
+        timeBlockArr.push(timeBlockInfo)
+    }
+     
     localStorage.setItem("timeBlockArr", JSON.stringify(timeBlockArr));
-}
+};
     
 
 var loadTasks = function(){
