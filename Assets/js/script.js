@@ -3,26 +3,25 @@ var timeBlocksEl = $(".time-block");
 
 var timeBlockArr = []
 
-
+//display current date
 currentDayEl.text(moment().format('dddd, MMMM Do'));
 
+// Sets time block color according to hour
 timeBlocksEl.each(function(){
     var time = $(this).data("time");
         
     if (moment().format("H") == time){
-        $(this).addClass("present")
-        console.log("present")
+        $(this).addClass("present") 
     }
     else if (moment().format("H") > time){
-        $(this).addClass("past")
-        console.log("past")
+        $(this).addClass("past")   
     }  
     else if(moment().format("H") < time){
         $(this).addClass("future")
-        console.log("future")
     }
 });
 
+// save the added task to localstorage
 var saveTask = function() {
     var text = $(this).siblings(".description").val().trim(); 
     var timeSlot = $(this).parent().attr("id")
@@ -32,7 +31,8 @@ var saveTask = function() {
         time: timeSlot,
         descript: text
     }
-    
+    // checks already existing time block task input
+    // if it already exist, just change description, if no previous info, create new time block info and save to localstorage
     for (i = 0; i < timeBlockArr.length; i++) {
         
         if (timeBlockArr[i].time === timeBlockInfo.time){
@@ -52,7 +52,7 @@ var saveTask = function() {
     localStorage.setItem("timeBlockArr", JSON.stringify(timeBlockArr));
 };
     
-
+// load pre existing task descriptions when page is refreshed
 var loadTasks = function(){
     var loadedTasks = localStorage.getItem("timeBlockArr");
 
@@ -69,6 +69,7 @@ var loadTasks = function(){
     };
 };
 
+    // set loaded tasks to appropriate time block
     var fillOutWorkDay = function(timeBlockInfo){
          switch (timeBlockInfo.time) {
 
@@ -111,17 +112,10 @@ var loadTasks = function(){
     };
     
    
-
     $(".saveBtn").on("click", saveTask);
     
     loadTasks();
     
-    
-     setTimeout(function(){
-        location.reload()
-        }, (1000*60)*10);
-
-        // if (moment().hour() > 17) {
-        //     console.log("delete")
-        // }
-    
+    // refresh page every ten minutes, to set appropriate time color coding
+    setTimeout(function(){location.reload()}, (1000*60)*10);
+   
