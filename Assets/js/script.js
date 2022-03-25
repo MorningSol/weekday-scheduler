@@ -1,6 +1,6 @@
 var currentDayEl = $("#currentDay");
 var timeBlocksEl = $(".time-block");
-
+var saveConfirmEl = $("#save-confirm")
 var timeBlockArr = []
 
 //display current date
@@ -23,6 +23,13 @@ timeBlocksEl.each(function(){
 
 // save the added task to localstorage
 var saveTask = function() {
+    
+    // feedback that task is being saved
+    saveConfirmEl.text("Saving in progress...");
+    setTimeout(function(){
+        saveConfirmEl.text("");
+    }, 1600)
+   
     var text = $(this).siblings(".description").val().trim(); 
     var timeSlot = $(this).parent().attr("id")
     var taskSame = false;
@@ -50,6 +57,8 @@ var saveTask = function() {
     }
      
     localStorage.setItem("timeBlockArr", JSON.stringify(timeBlockArr));
+
+
 };
     
 // load pre existing task descriptions when page is refreshed

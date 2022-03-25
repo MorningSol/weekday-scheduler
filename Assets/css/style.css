@@ -21,6 +21,13 @@ textarea{
   border-bottom: 10px solid black;
 }
 
+.save-confirm {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  
+}
+
 .description{
   white-space: pre-wrap;
 }
